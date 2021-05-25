@@ -42,7 +42,6 @@ public class Product {
         this.unitsInStock = unitsInStock;
         this.quantityPerUnit = quantityPerUnit;
     }
-    //This constructor for hibernate? Ask to Taylan abi
     public Product() {
     }
 }
