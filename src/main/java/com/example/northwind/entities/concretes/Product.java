@@ -1,6 +1,8 @@
 package com.example.northwind.entities.concretes;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -8,17 +10,17 @@ import javax.persistence.*;
  * @author : Recep Tayyip Erdogan
  * @since : 20-May-21, Thu
  **/
-@Data //Lombok
+
+@Data
 @Entity
 @Table(name="products")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
-    @Id//primaryKeyId Annotation
+    @Id
     @Column(name="product_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)//AutoIncrement
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Column(name="category_id")
-    private int categoryId;
 
     @Column(name="product_name")
     private String productName;
@@ -32,16 +34,8 @@ public class Product {
     @Column(name="quantity_per_unit")
     private String quantityPerUnit;
 
-    public Product(int id, int categoryId,
-                   String productName, double unitPrice,
-                   int unitsInStock, String quantityPerUnit) {
-        this.id = id;
-        this.categoryId = categoryId;
-        this.productName = productName;
-        this.unitPrice = unitPrice;
-        this.unitsInStock = unitsInStock;
-        this.quantityPerUnit = quantityPerUnit;
-    }
-    public Product() {
-    }
+    @ManyToOne()
+    @JoinColumn(name = "category_id")
+    private Category category;
+
 }
